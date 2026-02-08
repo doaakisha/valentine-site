@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For You ❤️</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #ffe6f0;
+  text-align: center;
+  padding: 40px;
+}
+
+button {
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 18px;
+  border-radius: 30px;
+  border: none;
+  background: #ff99cc;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.puzzle {
+  width: 300px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.piece {
+  width: 100px;
+  height: 100px;
+  background-size: 300px 300px;
+  border: 2px solid white;
+  cursor: pointer;
+}
+
+.letter {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<div id="home">
+  <h1>Choose one 💕</h1>
+  <button onclick="show('valentine1')">Valentine’s</button>
+  <button onclick="show('anniv1')">Anniversary</button>
+</div>
+
+<!-- VALENTINE PART 1 -->
+<div id="valentine1" class="hidden">
+  <h2>Will you be my Valentine? 💗</h2>
+  <button onclick="show('valentine2')">Yes</button>
+  <button id="noBtn">No</button>
+</div>
+
+<!-- VALENTINE PART 2 (PUZZLE) -->
+<div id="valentine2" class="hidden">
+  <h2>Put us back together 🧩</h2>
+  <div class="puzzle" id="puzzle"></div>
+  <button onclick="show('valentine3')">Done ❤️</button>
+</div>
+
+<!-- VALENTINE LETTER -->
+<div id="valentine3" class="hidden">
+  <h2>For you 💌</h2>
+  <div class="letter">
+    Write your Valentine letter here ❤️
+  </div>
+</div>
+
+  <!-- ANNIVERSARY Q1 -->
+<div id="anniv1" class="hidden">
+  <h2>Question 1</h2>
+  <p>Write your question here?</p>
+  <button onclick="show('anniv2')">Next</button>
+</div>
+
+<!-- ANNIVERSARY Q2 -->
+<div id="anniv2" class="hidden">
+  <h2>Question 2</h2>
+  <p>Write your question here?</p>
+  <button onclick="show('anniv3')">Next</button>
+</div>
+
+<!-- ANNIVERSARY Q3 -->
+<div id="anniv3" class="hidden">
+  <h2>Question 3</h2>
+  <p>Write your question here?</p>
+  <button onclick="show('anniv4')">Next</button>
+</div>
+
+<!-- ANNIVERSARY LETTER -->
+<div id="anniv4" class="hidden">
+  <h2>Happy Anniversary 💞</h2>
+  <div class="letter">
+    Write your anniversary paragraph here ❤️
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll("div").forEach(d => d.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+}
+
+// Moving NO button
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random() * window.innerWidth + "px";
+  noBtn.style.top = Math.random() * window.innerHeight + "px";
+});
+
+// Puzzle setup
+const puzzle = document.getElementById("puzzle");
+const image = "yourphoto.jpg"; // upload your photo to github
+
+let pieces = [];
+
+for (let i = 0; i < 9; i++) {
+  let piece = document.createElement("div");
+  piece.className = "piece";
+  piece.style.backgroundImage = `url(${image})`;
+
+  let x = i % 3;
+  let y = Math.floor(i / 3);
+
+  piece.style.backgroundPosition =
+    `-${x * 100}px -${y * 100}px`;
+
+  pieces.push(piece);
+}
+
+pieces.sort(() => Math.random() - 0.5);
+pieces.forEach(p => puzzle.appendChild(p));
+</script>
+
+</body>
+</html>
