@@ -136,17 +136,21 @@ button {
 
 <script>
 function show(id) {
-  document.querySelectorAll("div").forEach(d => d.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
+ document.querySelectorAll(".page").forEach(page => {
+  page.style.display = "none";
+ });
+ document.getElementById(id).style.display = "flex";
 }
 
 // Moving NO button
 const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseover", () => {
+if (noBtn) {
+ noBtn.addEventListener("mouseover", () => {
   noBtn.style.position = "absolute";
-  noBtn.style.left = Math.random() * window.innerWidth + "px";
-  noBtn.style.top = Math.random() * window.innerHeight + "px";
+  noBtn.style.left = Math.random() * 300 + "px";
+  noBtn.style.top = Math.random() * 400 + "px";
 });
+}
 
 // Puzzle setup
 const puzzle = document.getElementById("puzzle");
