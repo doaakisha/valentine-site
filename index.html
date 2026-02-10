@@ -73,6 +73,18 @@ button {
   font-size: 40px !important;
   padding: 30px 60px !important;
  }
+
+ .page {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+#home {
+  display: flex;
+}
  
 </style>
 </head>
@@ -109,14 +121,14 @@ button {
 </div>
 
 <!-- VALENTINE PART 2 (PUZZLE) -->
-<div id="valentine2" class="hidden">
+<div id="valentine2" class="page" style="display:none;">
   <h2>Put us back together 🧩</h2>
   <div class="puzzle" id="puzzle"></div>
   <button onclick="show('valentine3')">Done ❤️</button>
 </div>
 
 <!-- VALENTINE LETTER -->
-<div id="valentine3" class="hidden">
+<div id="valentine3" class="page" style="display:none;">
   <h2>For you 💌</h2>
   <div class="letter">
     Write your Valentine letter here ❤️
@@ -124,28 +136,28 @@ button {
 </div>
 
   <!-- ANNIVERSARY Q1 -->
-<div id="anniv1" class="hidden">
+<div id="anniv1" class="page" style="display:none;">
   <h2>Question 1</h2>
   <p>Write your question here?</p>
   <button onclick="show('anniv2')">Next</button>
 </div>
 
 <!-- ANNIVERSARY Q2 -->
-<div id="anniv2" class="hidden">
+<div id="anniv2" class="page" style="display:none;">
   <h2>Question 2</h2>
   <p>Write your question here?</p>
   <button onclick="show('anniv3')">Next</button>
 </div>
 
 <!-- ANNIVERSARY Q3 -->
-<div id="anniv3" class="hidden">
+<div id="anniv3" class="page" style="display:none;">
   <h2>Question 3</h2>
   <p>Write your question here?</p>
   <button onclick="show('anniv4')">Next</button>
 </div>
 
 <!-- ANNIVERSARY LETTER -->
-<div id="anniv4" class="hidden">
+<div id="anniv4" class="page" style="display:none;">
   <h2>Happy Anniversary 💞</h2>
   <div class="letter">
     Write your anniversary paragraph here ❤️
@@ -153,11 +165,15 @@ button {
 </div>
 
 <script>
+<script>
 function show(id) {
- document.querySelectorAll(".page").forEach(page => {
-  page.style.display = "none";
- });
- document.getElementById(id).style.display = "flex";
+  const pages = document.getElementsByClassName("page");
+
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].style.display = "none";
+  }
+
+  document.getElementById(id).style.display = "flex";
 }
 
 // Moving NO button
