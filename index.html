@@ -151,40 +151,60 @@ button {
 </div>
 
 <script>
-function show(id) {
-  const pages = document.getElementsByClassName("page");
-  for (let i = 0; i < pages.length; i++) pages[i].style.display = "none";
-  document.getElementById(id).style.display = "block";
+document.addEventListener("DOMContentLoaded", () => {
 
-  if (id === 'valentine1') {
-const noBtn = document.getElementById("noBtn");
-if (noBtn) {
-  noBtn.addEventListener("click", () => {
-    noBtn.onmouseover = () => {
-      noBtn.style.position = "absolute";
-      noBtn.style.left = Math.random() * 200 + "px";
-      noBtn.style.top = Math.random() * 400 + "px";
-    };
-  });
-}
-  // Puzzle setup
-const puzzle = document.getElementById("puzzle");
-const image = "yourphoto.jpg"; // upload your photo
+  // Page switcher
+  function show(id) {
+    const pages = document.getElementsByClassName("page");
+    for (let i = 0; i < pages.length; i++) {
+      pages[i].style.display = "none"; // hide all pages
+    }
+    document.getElementById(id).style.display = "flex"; // show the selected page
 
-if (puzzle) {
-  let pieces = [];
-  for (let i = 0; i < 9; i++) {
-    let piece = document.createElement("div");
-    piece.className = "piece";
-    piece.style.backgroundImage = `url(${image})`;
-    let x = i % 3;
-    let y = Math.floor(i / 3);
-    piece.style.backgroundPosition = `-${x * 100}px -${y * 100}px`;
-    pieces.push(piece);
+    // Reset No button when showing Valentine page
+    if (id === 'valentine1') {
+      const noBtn = document.getElementById("noBtn");
+      if (noBtn) {
+        noBtn.style.position = "relative"; // reset position
+        noBtn.onmouseover = null;           // remove previous hover effect
+      }
+    }
   }
-  pieces.sort(() => Math.random() - 0.5);
-  pieces.forEach(p => puzzle.appendChild(p));
-}
+
+  // No button moves only after first click
+  const noBtn = document.getElementById("noBtn");
+  if (noBtn) {
+    noBtn.addEventListener("click", () => {
+      noBtn.onmouseover = () => {
+        noBtn.style.position = "absolute";
+        noBtn.style.left = Math.random() * 200 + "px";
+        noBtn.style.top = Math.random() * 400 + "px";
+      };
+    });
+  }
+
+  // Puzzle setup (if you’re using it)
+  const puzzle = document.getElementById("puzzle");
+  const image = "yourphoto.jpg"; // replace with your actual photo
+  if (puzzle) {
+    let pieces = [];
+    for (let i = 0; i < 9; i++) {
+      let piece = document.createElement("div");
+      piece.className = "piece";
+      piece.style.backgroundImage = `url(${image})`;
+      let x = i % 3;
+      let y = Math.floor(i / 3);
+      piece.style.backgroundPosition = `-${x * 100}px -${y * 100}px`;
+      pieces.push(piece);
+    }
+    pieces.sort(() => Math.random() - 0.5);
+    pieces.forEach(p => puzzle.appendChild(p));
+  }
+
+  // Make show() globally accessible for onclick="show('id')" in your HTML
+  window.show = show;
+
+});
 </script>
 </body>
 </html>
