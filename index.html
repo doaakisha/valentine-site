@@ -155,11 +155,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Page switcher
   function show(id) {
-    const pages = document.getElementsByClassName("page");
-    for (let i = 0; i < pages.length; i++) {
-      pages[i].style.display = "none"; // hide all pages
-    }
-    document.getElementById(id).style.display = "flex"; // show the selected page
+  const pages = document.getElementsByClassName("page");
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].style.display = "none"; // hide all pages
+  }
+  document.getElementById(id).style.display = "flex"; // show the selected page
+}
 
     // Reset No button when showing Valentine page
     if (id === 'valentine1') {
