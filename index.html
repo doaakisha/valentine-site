@@ -93,97 +93,97 @@ button {
 
 <!-- HOME -->
 <div id="home" class="page">
- <div>
-  <h1>may i interest you in  today's order?</h1>
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGt3NzUybmcxeWNobzlvNTdseHozdGFzNmtveno4bWp6YjVlYm53aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/rtHuVAvzbl07kRebPo/giphy.gif" width="200">
- <br>
-  <button onclick="show('valentine1')">valentine’s!!</button>
-  <button onclick="show('anniv1')"> our anniversary <3 </button>
+  <div class="page-content">
+    <h1>may i interest you in today's order?</h1>
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGt3NzUybmcxeWNobzlvNTdseHozdGFzNmtveno4bWp6YjVlYm53aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/rtHuVAvzbl07kRebPo/giphy.gif" width="200">
+    <button onclick="show('valentine1')">valentine’s!!</button>
+    <button onclick="show('anniv1')">our anniversary <3</button>
+  </div>
 </div>
 
 <!-- VALENTINE PART 1 -->
-<div id="valentine1" class="page" style="display:none;">
+<div id="valentine1" class="page">
   <div class="page-content">
-
-    <h2 dir="rtl">
-      مبدئيا كدا هل ممكن بعد اذن حضرتك تكون ماي فالنتاين؟ 💗
-    </h2>
-
-    <button id="yesBtn" onclick="show('valentine2')" dir="rtl">
-      اكيد شدددييييد
-    </button>
-
-    <button id="noBtn" dir="rtl">
-      لا
-    </button>
-
+    <h2 dir="rtl">مبدئيا كدا هل ممكن بعد اذن حضرتك تكون ماي فالنتاين؟ 💗</h2>
+    <button id="yesBtn" onclick="show('valentine2')" dir="rtl">اكيد شدددييييد 💖</button>
+    <button id="noBtn" dir="rtl">لا</button>
   </div>
 </div>
 
 <!-- VALENTINE PART 2 (PUZZLE) -->
-<div id="valentine2" class="page" style="display:none;">
-  <h2>Put us back together 🧩</h2>
-  <div class="puzzle" id="puzzle"></div>
-  <button onclick="show('valentine3')">Done ❤️</button>
+<div id="valentine2" class="page">
+  <div class="page-content">
+    <h2>Put us back together 🧩</h2>
+    <div class="puzzle" id="puzzle"></div>
+    <button onclick="show('valentine3')">Done ❤️</button>
+  </div>
 </div>
 
 <!-- VALENTINE LETTER -->
-<div id="valentine3" class="page" style="display:none;">
-  <h2>For you 💌</h2>
-  <div class="letter">
-    Write your Valentine letter here ❤️
+<div id="valentine3" class="page">
+  <div class="page-content">
+    <h2>For you 💌</h2>
+    <div class="letter">
+      Write your Valentine letter here ❤️
+    </div>
   </div>
 </div>
-
-  <!-- ANNIVERSARY Q1 -->
-<div id="anniv1" class="page" style="display:none;">
-  <h2>Question 1</h2>
-  <p>Write your question here?</p>
-  <button onclick="show('anniv2')">Next</button>
+ <!-- ANNIVERSARY Q1 -->
+<div id="anniv1" class="page">
+  <div class="page-content">
+    <h2>Question 1</h2>
+    <p>Write your question here?</p>
+    <button onclick="show('anniv2')">Next</button>
+  </div>
 </div>
 
 <!-- ANNIVERSARY Q2 -->
-<div id="anniv2" class="page" style="display:none;">
-  <h2>Question 2</h2>
-  <p>Write your question here?</p>
-  <button onclick="show('anniv3')">Next</button>
+<div id="anniv2" class="page">
+  <div class="page-content">
+    <h2>Question 2</h2>
+    <p>Write your question here?</p>
+    <button onclick="show('anniv3')">Next</button>
+  </div>
 </div>
 
 <!-- ANNIVERSARY Q3 -->
-<div id="anniv3" class="page" style="display:none;">
-  <h2>Question 3</h2>
-  <p>Write your question here?</p>
-  <button onclick="show('anniv4')">Next</button>
+<div id="anniv3" class="page">
+  <div class="page-content">
+    <h2>Question 3</h2>
+    <p>Write your question here?</p>
+    <button onclick="show('anniv4')">Next</button>
+  </div>
 </div>
 
 <!-- ANNIVERSARY LETTER -->
-<div id="anniv4" class="page" style="display:none;">
-  <h2>Happy Anniversary 💞</h2>
-  <div class="letter">
-    Write your anniversary paragraph here ❤️
+<div id="anniv4" class="page">
+  <div class="page-content">
+    <h2>Happy Anniversary 💞</h2>
+    <div class="letter">
+      Write your anniversary paragraph here ❤️
+    </div>
   </div>
 </div>
 
 <script>
-<script>
 function show(id) {
   const pages = document.getElementsByClassName("page");
-
   for (let i = 0; i < pages.length; i++) {
     pages[i].style.display = "none";
   }
-
   document.getElementById(id).style.display = "flex";
-}
 
-// Moving NO button
-const noBtn = document.getElementById("noBtn");
-if (noBtn) {
- noBtn.addEventListener("mouseover", () => {
-  noBtn.style.position = "absolute";
-  noBtn.style.left = Math.random() * 300 + "px";
-  noBtn.style.top = Math.random() * 400 + "px";
-});
+  // attach NO button movement after showing Valentine1
+  if (id === 'valentine1') {
+    const noBtn = document.getElementById("noBtn");
+    if (noBtn) {
+      noBtn.onmouseover = () => {
+        noBtn.style.position = "absolute";
+        noBtn.style.left = Math.random() * 200 + "px";
+        noBtn.style.top = Math.random() * 400 + "px";
+      }
+    }
+  }
 }
 
 // Puzzle setup
@@ -199,9 +199,7 @@ for (let i = 0; i < 9; i++) {
 
   let x = i % 3;
   let y = Math.floor(i / 3);
-
-  piece.style.backgroundPosition =
-    `-${x * 100}px -${y * 100}px`;
+  piece.style.backgroundPosition = `-${x * 100}px -${y * 100}px`;
 
   pieces.push(piece);
 }
