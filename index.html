@@ -83,7 +83,7 @@ button {
 <body>
 
 <!-- HOME -->
-<div id="home" class="page" style="display: block;">
+<div id="home" class="page" style="display: flex;">
   <div class="page-content">
     <h1>may i interest you in today's order?</h1>
     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaGt3NzUybmcxeWNobzlvNTdseHozdGFzNmtveno4bWp6YjVlYm53aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/rtHuVAvzbl07kRebPo/giphy.gif" width="200">
@@ -172,15 +172,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // No button moves only after first click
-  const noBtn = document.getElementById("noBtn");
-  if (noBtn) {
-    noBtn.addEventListener("click", () => {
-      noBtn.onmouseover = () => {
-        noBtn.style.position = "absolute";
-        noBtn.style.left = Math.random() * 200 + "px";
-        noBtn.style.top = Math.random() * 400 + "px";
-      };
-    });
+const noBtn = document.getElementById("noBtn");
+if (noBtn) {
+  noBtn.addEventListener("click", () => {
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * 200 + "px";
+    noBtn.style.top = Math.random() * 400 + "px";
+  });
+}
   }
 
   // Puzzle setup (if you’re using it)
