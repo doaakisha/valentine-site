@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>For You ❤️</title>
- <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;700&display=swap" rel="stylesheet">
+<title>For You- ❤️</title>
+ <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <style>
  h1 {
   font-size:40px;
   margin-bottom: 34px;
  }
 body {
-  font-family: 'Fredoka', sans-serif;
+  font-family: 'Fredoka', 'Cairo', sans-serif;
   background: #ffe6f0;
   margin: 0;
  padding: 0;
@@ -32,7 +32,7 @@ body {
   height: auto;
  }
 button {
-  font-family: 'Fredoka', sans-serif; /* same font as body */
+  font-family: 'Fredoka', 'Cairo', sans-serif; /* same font as body */
   font-size: 36px;
   border-radius: 30px;
   padding: 15px 30px;
@@ -84,10 +84,22 @@ button {
 </div>
 
 <!-- VALENTINE PART 1 -->
-<div id="valentine1" class="hidden">
-  <h2>Will you be my Valentine? 💗</h2>
-  <button onclick="show('valentine2')">Yes</button>
-  <button id="noBtn">No</button>
+<div id="valentine1" class="page" style="display:none;">
+  <div class="page-content">
+
+    <h2 dir="rtl">
+      مبدئيا كدا هل تقبل حضرتك تكون ماي فالنتاين؟ 💗
+    </h2>
+
+    <button id="yesBtn" onclick="show('valentine2')" dir="rtl">
+      اكيد شدددييييد 💖
+    </button>
+
+    <button id="noBtn" dir="rtl">
+      لا
+    </button>
+
+  </div>
 </div>
 
 <!-- VALENTINE PART 2 (PUZZLE) -->
