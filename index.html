@@ -57,22 +57,19 @@ button {
   background: #ff66aa;
 }
   .puzzle {
-  width: 100vw;
-  max-width: 900px;
-  height: 100vw;
-  max-height: 900px;
+  width: 900px;
+  height: 900px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
   margin: 20px auto;
+  max-width: 95vw;
 }
 
 .piece {
-  width: calc(100vw / 3);
-  max-width: 300px;
-  height: calc(100vw / 3);
-  max-height: 300px;
-  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  background-size: 900px 900px;
   border: 2px solid white;
   cursor: pointer;
 }
@@ -83,6 +80,18 @@ button {
   border-radius: 20px;
   margin-top: 20px;
 }
+  h1 {
+  font-size: 36px;
+  }
+  h2 {
+  font-size: 30px;
+  }
+  p {
+  font-size: 22px;
+    }
+  button {
+  font-size: 22px;
+  }
 </style>
 </head>
 <body>
@@ -188,27 +197,43 @@ button {
   }
 
   // Puzzle setup
-const puzzleContainer = document.getElementById("puzzle");
-const image = "https://raw.githubusercontent.com/doaakisha/valentine-site/main/couple.jpg";
+const puzzle = document.getElementById("puzzle");
+const image = "https://raw.githubusercontent.com/doaakisha/valentine-site/main/couple.jpg"; // your image
 
-let pieces = [];
+if (puzzle) {
+  let pieces = [];
+  let selected = null;
 
-// Create 9 pieces
-for (let i = 0; i < 9; i++) {
-  let piece = document.createElement("div");
-  piece.className = "piece";
-  piece.style.backgroundImage = `url(${image})`;
+  for (let i = 0; i < 9; i++) {
+    let piece = document.createElement("div");
+    piece.className = "piece";
+    piece.style.backgroundImage = `url(${image})`;
 
-  // Calculate x, y positions
-  let x = i % 3;
-  let y = Math.floor(i / 3);
-  piece.style.backgroundPosition = `-${x * 300}px -${y * 300}px`; // 300 = piece size
-  pieces.push(piece);
+    let x = i % 3;
+    let y = Math.floor(i / 3);
+
+    piece.style.backgroundPosition = `-${x * 300}px -${y * 300}px`;
+
+    piece.addEventListener("click", () => {
+      if (!selected) {
+        selected = piece;
+        piece.style.border = "4px solid red";
+      } else {
+        let temp = selected.style.backgroundPosition;
+        selected.style.backgroundPosition = piece.style.backgroundPosition;
+        piece.style.backgroundPosition = temp;
+
+        selected.style.border = "2px solid white";
+        selected = null;
+      }
+    });
+
+    pieces.push(piece);
+  }
+
+  pieces.sort(() => Math.random() - 0.5);
+  pieces.forEach(p => puzzle.appendChild(p));
 }
-
-// Shuffle pieces visually
-pieces.sort(() => Math.random() - 0.5);
-pieces.forEach(p => puzzleContainer.appendChild(p));
 
 // Click-to-swap logic
 let firstPiece = null;
