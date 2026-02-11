@@ -151,41 +151,36 @@ button {
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  // Page switcher
+  // Page switcher (global)
   function show(id) {
-  const pages = document.getElementsByClassName("page");
-  for (let i = 0; i < pages.length; i++) {
-    pages[i].style.display = "none"; // hide all pages
-  }
-  document.getElementById(id).style.display = "flex"; // show the selected page
-}
+    const pages = document.getElementsByClassName("page");
+    for (let i = 0; i < pages.length; i++) {
+      pages[i].style.display = "none"; // hide all pages
+    }
+    document.getElementById(id).style.display = "flex"; // show the selected page
 
     // Reset No button when showing Valentine page
     if (id === 'valentine1') {
       const noBtn = document.getElementById("noBtn");
       if (noBtn) {
         noBtn.style.position = "relative"; // reset position
-        noBtn.onmouseover = null;           // remove previous hover effect
       }
     }
   }
 
-  // No button moves only after first click
-const noBtn = document.getElementById("noBtn");
-if (noBtn) {
-  noBtn.addEventListener("click", () => {
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random() * 200 + "px";
-    noBtn.style.top = Math.random() * 400 + "px";
-  });
-}
+  // No button moves on click (works on mobile & desktop)
+  const noBtn = document.getElementById("noBtn");
+  if (noBtn) {
+    noBtn.addEventListener("click", () => {
+      noBtn.style.position = "absolute";
+      noBtn.style.left = Math.random() * 200 + "px";
+      noBtn.style.top = Math.random() * 400 + "px";
+    });
   }
 
-  // Puzzle setup (if you’re using it)
+  // Puzzle setup
   const puzzle = document.getElementById("puzzle");
-  const image = "yourphoto.jpg"; // replace with your actual photo
+  const image = "yourphoto.jpg"; // replace with your uploaded image
   if (puzzle) {
     let pieces = [];
     for (let i = 0; i < 9; i++) {
@@ -200,11 +195,6 @@ if (noBtn) {
     pieces.sort(() => Math.random() - 0.5);
     pieces.forEach(p => puzzle.appendChild(p));
   }
-
-  // Make show() globally accessible for onclick="show('id')" in your HTML
-  window.show = show;
-
-});
 </script>
 </body>
 </html>
