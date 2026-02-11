@@ -177,12 +177,11 @@ button {
 <script>
   // Page switcher (global)
   function show(id) {
-  const pages = document.getElementsByClassName("page");
-  for (let i = 0; i < pages.length; i++) {
-    pages[i].style.display = "none"; // hide all pages
-  }
-  document.getElementById(id).style.display = "flex"; // show the selected page
-}
+    const pages = document.getElementsByClassName("page");
+    for (let i = 0; i < pages.length; i++) {
+      pages[i].style.display = "none"; // hide all pages
+    }
+    document.getElementById(id).style.display = "flex"; // show selected page
 
     // Reset No button when showing Valentine page
     if (id === 'valentine1') {
@@ -204,62 +203,42 @@ button {
   }
 
   // Puzzle setup
-const puzzle = document.getElementById("puzzle");
-const image = "https://raw.githubusercontent.com/doaakisha/valentine-site/main/couple.jpg"; // your image
+  const puzzle = document.getElementById("puzzle");
+  const image = "https://raw.githubusercontent.com/doaakisha/valentine-site/main/couple.jpg"; // your image
+  if (puzzle) {
+    let pieces = [];
+    let selected = null;
 
-if (puzzle) {
-  let pieces = [];
-  let selected = null;
+    for (let i = 0; i < 9; i++) {
+      let piece = document.createElement("div");
+      piece.className = "piece";
+      piece.style.backgroundImage = `url(${image})`;
 
-  for (let i = 0; i < 9; i++) {
-    let piece = document.createElement("div");
-    piece.className = "piece";
-    piece.style.backgroundImage = `url(${image})`;
+      let x = i % 3;
+      let y = Math.floor(i / 3);
 
-    let x = i % 3;
-    let y = Math.floor(i / 3);
+      piece.style.backgroundPosition = `-${x * 300}px -${y * 300}px`;
 
-    piece.style.backgroundPosition = `-${x * 300}px -${y * 300}px`;
+      piece.addEventListener("click", () => {
+        if (!selected) {
+          selected = piece;
+          piece.style.border = "4px solid red";
+        } else {
+          let temp = selected.style.backgroundPosition;
+          selected.style.backgroundPosition = piece.style.backgroundPosition;
+          piece.style.backgroundPosition = temp;
 
-    piece.addEventListener("click", () => {
-      if (!selected) {
-        selected = piece;
-        piece.style.border = "4px solid red";
-      } else {
-        let temp = selected.style.backgroundPosition;
-        selected.style.backgroundPosition = piece.style.backgroundPosition;
-        piece.style.backgroundPosition = temp;
+          selected.style.border = "2px solid white";
+          selected = null;
+        }
+      });
 
-        selected.style.border = "2px solid white";
-        selected = null;
-      }
-    });
-
-    pieces.push(piece);
-  }
-
-  pieces.sort(() => Math.random() - 0.5);
-  pieces.forEach(p => puzzle.appendChild(p));
-}
-
-// Click-to-swap logic
-let firstPiece = null;
-pieces.forEach(piece => {
-  piece.addEventListener("click", () => {
-    if (!firstPiece) {
-      firstPiece = piece;
-      piece.style.border = "2px solid red"; // highlight selection
-    } else {
-      // Swap background positions
-      const temp = firstPiece.style.backgroundPosition;
-      firstPiece.style.backgroundPosition = piece.style.backgroundPosition;
-      piece.style.backgroundPosition = temp;
-
-      firstPiece.style.border = "2px solid white"; // remove highlight
-      firstPiece = null;
+      pieces.push(piece);
     }
-  });
-});
+
+    pieces.sort(() => Math.random() - 0.5);
+    pieces.forEach(p => puzzle.appendChild(p));
+  }
 </script>
 </body>
 </html>
