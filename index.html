@@ -165,11 +165,22 @@ button {
   </div>
 </div>
 
+<!-- ANNIVERSARY QUESTION 3 – PIN CODE -->
 <div id="anniv3" class="page">
   <div class="page-content">
-    <h2>Question 3</h2>
-    <p>Write your question here?</p>
-    <button onclick="show('anniv4')">Next</button>
+    <h2>طلستك بحب اي حاجة فيك 💋</h2>
+    <p>الأهم من دا كلو،<br>الرجاء ادخال الرقم السري.</p>
+    <input type="number" id="pinInput" placeholder="••••" style="font-size: 5vw; padding: 10px; margin: 20px 0; text-align: center;">
+    <br>
+    <button id="submitPin">Submit</button>
+  </div>
+</div>
+
+<!-- WRONG PIN PAGE -->
+<div id="wrongPin" class="page">
+  <div class="page-content">
+    <h2>احسن </h2>
+    <button onclick="show('anniv3')">Go back :(</button>
   </div>
 </div>
 
