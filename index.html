@@ -256,6 +256,39 @@ button {
     pieces.sort(() => Math.random() - 0.5);
     pieces.forEach(p => puzzle.appendChild(p));
   }
+  // Q1 buttons
+const fightMe = document.getElementById("fightMe");
+const fightHim = document.getElementById("fightHim");
+
+fightMe.addEventListener("click", () => {
+  show('anniv2'); // move to next question
+});
+
+fightHim.addEventListener("click", () => {
+  // Make "Me" button grow
+  fightMe.style.transition = "all 0.5s ease";
+  fightMe.style.position = "absolute";
+  fightMe.style.top = "0";
+  fightMe.style.left = "0";
+  fightMe.style.width = "100vw";
+  fightMe.style.height = "100vh";
+  fightMe.style.fontSize = "20vw";
+  fightMe.style.zIndex = "9999";
+});
+  const flirtyBtns = document.querySelectorAll(".flirtyBtn");
+flirtyBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    show('anniv3'); // move to PIN input
+  });
+});
+  function checkPin() {
+  const pin = document.getElementById("pinInput").value;
+  if (pin === "2003") {
+    show('anniv4'); // correct → anniversary paragraph
+  } else {
+    show('annivWrong'); // incorrect → crying page
+  }
+}
 </script>
 </body>
 </html>
