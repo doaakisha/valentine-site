@@ -68,8 +68,7 @@ button {
 .piece {
   width: 300px;
   height: 300px;
-  background-size: cover;
-  background-position: center;
+  background-size: 900px 900px;
   border: 2px solid white;
   cursor: pointer;
 }
@@ -108,9 +107,9 @@ button {
 <!-- VALENTINE PUZZLE -->
 <div id="valentine2" class="page">
   <div class="page-content">
-    <h2>Put us back together 🧩</h2>
+    <h2 dir="rtl"عشان عارفاك اصلا ما بتحب الفالنتاين وكسرت قلبي وكسرتنا الاتنين. وعشان كدا لازم ترجعنا لي بعض.</h2>
     <div class="puzzle" id="puzzle"></div>
-    <button onclick="show('valentine3')">Done ❤️</button>
+    <button onclick="show('valentine3')"> periodttt ❤️</button>
   </div>
 </div>
 <!-- VALENTINE LETTER -->
@@ -182,22 +181,46 @@ button {
   }
 
   // Puzzle setup
-  const puzzle = document.getElementById("puzzle");
-  const image = "https://raw.githubusercontent.com/doaakisha/valentine-site/main/couple.jpg"; // replace with your uploaded image
-  if (puzzle) {
-    let pieces = [];
-    for (let i = 0; i < 9; i++) {
-      let piece = document.createElement("div");
-      piece.className = "piece";
-      piece.style.backgroundImage = `url(${image})`;
-      let x = i % 3;
-      let y = Math.floor(i / 3);
-      piece.style.backgroundPosition = `-${x * 100}px -${y * 100}px`;
-      pieces.push(piece);
+const puzzleContainer = document.getElementById("puzzle");
+const image = "https://raw.githubusercontent.com/doaakisha/valentine-site/main/couple.jpg";
+
+let pieces = [];
+
+// Create 9 pieces
+for (let i = 0; i < 9; i++) {
+  let piece = document.createElement("div");
+  piece.className = "piece";
+  piece.style.backgroundImage = `url(${image})`;
+
+  // Calculate x, y positions
+  let x = i % 3;
+  let y = Math.floor(i / 3);
+  piece.style.backgroundPosition = `-${x * 300}px -${y * 300}px`; // 300 = piece size
+  pieces.push(piece);
+}
+
+// Shuffle pieces visually
+pieces.sort(() => Math.random() - 0.5);
+pieces.forEach(p => puzzleContainer.appendChild(p));
+
+// Click-to-swap logic
+let firstPiece = null;
+pieces.forEach(piece => {
+  piece.addEventListener("click", () => {
+    if (!firstPiece) {
+      firstPiece = piece;
+      piece.style.border = "2px solid red"; // highlight selection
+    } else {
+      // Swap background positions
+      const temp = firstPiece.style.backgroundPosition;
+      firstPiece.style.backgroundPosition = piece.style.backgroundPosition;
+      piece.style.backgroundPosition = temp;
+
+      firstPiece.style.border = "2px solid white"; // remove highlight
+      firstPiece = null;
     }
-    pieces.sort(() => Math.random() - 0.5);
-    pieces.forEach(p => puzzle.appendChild(p));
-  }
+  });
+});
 </script>
 </body>
 </html>
