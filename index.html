@@ -165,14 +165,26 @@ button {
   </div>
 </div>
 
-<!-- ANNIVERSARY QUESTION 3 – PIN CODE -->
+<!-- PIN PAGE -->
 <div id="anniv3" class="page">
   <div class="page-content">
     <h2>طلستك بحب اي حاجة فيك 💋</h2>
-    <p>الأهم من دا كلو،<br>الرجاء ادخال الرقم السري.</p>
-    <input type="number" id="pinInput" placeholder="••••" style="font-size: 5vw; padding: 10px; margin: 20px 0; text-align: center;">
-    <br>
-    <button id="submitPin">Submit</button>
+    <p>الأهم من دا كلو، الرجاء ادخال الرقم السري.</p>
+    <div id="pinDisplay" style="font-size:8vw; margin:20px 0; letter-spacing:10px;"></div>
+    <div id="pinPad" style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; max-width:300px; margin:auto;">
+      <button class="pinBtn">1</button>
+      <button class="pinBtn">2</button>
+      <button class="pinBtn">3</button>
+      <button class="pinBtn">4</button>
+      <button class="pinBtn">5</button>
+      <button class="pinBtn">6</button>
+      <button class="pinBtn">7</button>
+      <button class="pinBtn">8</button>
+      <button class="pinBtn">9</button>
+      <button class="pinBtn">0</button>
+      <button id="pinClear">C</button>
+      <button id="checkPinBtn">✔</button>
+    </div>
   </div>
 </div>
 
@@ -265,15 +277,15 @@ fightMe.addEventListener("click", () => {
 });
 
 fightHim.addEventListener("click", () => {
-  // Make "Me" button grow
-  fightMe.style.transition = "all 0.5s ease";
   fightMe.style.position = "absolute";
-  fightMe.style.top = "0";
-  fightMe.style.left = "0";
-  fightMe.style.width = "100vw";
-  fightMe.style.height = "100vh";
-  fightMe.style.fontSize = "20vw";
+  fightMe.style.top = "50%";
+  fightMe.style.left = "50%";
+  fightMe.style.transform = "translate(-50%, -50%) scale(1)"; // start scale
   fightMe.style.zIndex = "9999";
+  fightMe.style.transition = "transform 1s ease"; // smooth animation
+  setTimeout(() => {
+    fightMe.style.transform = "translate(-50%, -50%) scale(15)"; // grows gradually
+  }, 50);
 });
   const flirtyBtns = document.querySelectorAll(".flirtyBtn");
 flirtyBtns.forEach(btn => {
@@ -289,6 +301,32 @@ flirtyBtns.forEach(btn => {
     show('annivWrong'); // incorrect → crying page
   }
 }
+  // PIN pad logic
+  let enteredPin = "";
+
+  document.querySelectorAll(".pinBtn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (enteredPin.length < 4) {
+        enteredPin += btn.textContent;
+        document.getElementById("pinDisplay").textContent = "*".repeat(enteredPin.length);
+      }
+    });
+  });
+
+  document.getElementById("pinClear").addEventListener("click", () => {
+    enteredPin = "";
+    document.getElementById("pinDisplay").textContent = "";
+  });
+
+  document.getElementById("checkPinBtn").addEventListener("click", () => {
+    if (enteredPin === "2003") {
+      show('anniv4'); // correct
+    } else {
+      show('annivWrong'); // wrong
+      enteredPin = "";
+      document.getElementById("pinDisplay").textContent = "";
+    }
+  });
 </script>
 </body>
 </html>
